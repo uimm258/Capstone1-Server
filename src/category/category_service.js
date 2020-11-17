@@ -32,4 +32,4 @@ const CategoryService = {
     },
 };
 
-module.export = CategoryService;
+module.exports = CategoryService;

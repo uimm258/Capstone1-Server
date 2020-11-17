@@ -6,6 +6,7 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const CategoryRoute = require('./category/category_router')
 const ScriptsRoute = require('./scripts/scripts_router')
+const validateBearerToken = require('./validate-bearer-token')
 
 const app = express()
 
@@ -13,7 +14,8 @@ const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
   : 'common';
 
-app.use(morgan(morganOption))
+const morganSetting = process.env.NODE_ENV === 'production' ? 'tiny' : 'common'
+app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 
@@ -25,6 +27,8 @@ app.use('/scripts', ScriptsRoute)
 app.get('/', (req, res) => {
    res.send('Hello, world!')
 })
+
+app.use(validateBearerToken)
 
 // error handlers
 app.use(function errorHandler(error, req, res, next) {
