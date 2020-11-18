@@ -23,7 +23,7 @@ CategoryRouter
         for(const field of ['category_name']){
             if(!req.body[field]){
                 logger.error(`The ${field} is missing for the category to post`);
-                return res.status(400).json({error:{message:`${feild} is missing`}});
+                return res.status(400).json({error:{message:`${field} is missing`}});
             }
         }
         const newCategory = {

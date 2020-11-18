@@ -1,7 +1,7 @@
-insert into category (id, category_name)
+insert into category (category_name)
 values
-('0','六人本'),
-('1','五人本'),
-('2','七人本'),
-('3','八人本'),
-('4','九人本');
+('六人本'),
+('五人本'),
+('七人本'),
+('八人本'),
+('九人本');

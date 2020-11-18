@@ -1,2 +1,4 @@
 {"message":"Script with id 045 not found","level":"error"}
 {"message":"Script with id 45 not found","level":"error"}
+{"message":"The category_name is missing for the category to post","level":"error"}
+{"message":"category with id5 created","level":"info"}
