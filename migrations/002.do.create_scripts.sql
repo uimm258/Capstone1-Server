@@ -6,5 +6,6 @@ CREATE TABLE scripts (
     time_spend TEXT NOT NULL, 
     scripts_price TEXT NOT NULL,
     scripts_type TEXT NOT NULL, 
+    scripts_image TEXT,
     content TEXT NOT NULL
 );

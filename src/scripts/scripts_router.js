@@ -12,6 +12,7 @@ const initScripts = (script) => ({
     time_spend: xss(script.time_spend),
     scripts_price: xss(script.scripts_price),
     scripts_type: xss(script.scripts_type),
+    scripts_image: xss(script.scripts_image),
     content: xss(script.content),
     category_id: script.category_id,
 });
@@ -26,7 +27,7 @@ ScriptsRouter
             .catch(next);
     })
     .post(jsonParser, (req, res, next) => {
-        for(const field of ['scripts_name', 'people', 'time_spend', 'scripts_price', 'scripts_type', 'content', 'category_id']){
+        for(const field of ['scripts_name', 'people', 'time_spend', 'scripts_price', 'scripts_type', 'scripts_image', 'content', 'category_id']){
             if(!req.body[field]){
                 logger.error(`The ${field} value is missing from scripts post`);
                 return res.status(400).json({error: {message:`${field} is missing`}});
@@ -38,6 +39,7 @@ ScriptsRouter
             time_spend: xss(script.time_spend),
             scripts_price: xss(script.scripts_price),
             scripts_type: xss(script.scripts_type),
+            scripts_image: xss(script.scripts_image),
             content: xss(script.content),
             category_id: script.category_id,
         };
