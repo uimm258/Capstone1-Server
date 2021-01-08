@@ -1,9 +1,10 @@
 const express = require('express');
-const ScriptsService = require('./scripts_service');
+const AdminScriptsService = require('./admin-script-service');
 const xss = require('xss');
-const ScriptsRouter = express.Router();
+const AdminScriptsRouter = express.Router();
 const jsonParser = express.json();
 const logger = require('../logger');
+const { requireAuth } = require('../../middleware/jwt-auth');
 
 const initScripts = (script) => ({
     id: script.id,
@@ -18,11 +19,12 @@ const initScripts = (script) => ({
     admin: script.admin_owner
 });
 
-ScriptsRouter
+AdminScriptsRouter
     .route('/')
+    .all(requireAuth)
     .get((req, res, next) => {
         const knex = req.app.get('db');
-        ScriptsService
+        AdminScriptsService
             .getAllScripts(knex, req.user.id)
             .then((scripts) => res.json(scripts.map(initScripts)))
             .catch(next);
@@ -44,8 +46,8 @@ ScriptsRouter
             content: xss(script.content),
             category_id: script.category_id,
         };
-        newCategory.admin = req.user.id
-        ScriptsService
+        newScript.admin = req.user.id
+        AdminScriptsService
             .insertNote(req.app.get('db'), newScript)
             .then((script) => {
                 logger.info(`Scripts with id ${script.id} has been created`);
@@ -54,11 +56,12 @@ ScriptsRouter
             .catch(next);
     });
 
-ScriptsRouter
+AdminScriptsRouter
     .route('/:script_id')
+    .all(requireAuth)
     .all((req, res, next) => {
         const { script_id } = req.params
-        ScriptsService
+        AdminScriptsService
             .getById(req.app.get('db'), script_id)
             .then((script)=> {
                 if(!script) {
@@ -76,7 +79,7 @@ ScriptsRouter
     })
     .delete((req, res, next) => {
         const { script_id } = req.params;
-        ScriptsService
+        AdminScriptsService
             .deleteScript(req.app.get('db'), script_id, req.user.id)
             .then(() => {
                 logger.info(`Script with id ${script_id} deleted`);
@@ -92,7 +95,7 @@ ScriptsRouter
                 error: { message: 'patch request must supply values'},
             });
         }
-        ScriptsService
+        AdminScriptsService
             .updateScript(req.app.get('db'), res.script.id, scriptUpdate, req.user.id)
             .then((updatedScript) => {
                 logger.info(`script with id ${res.script.id} updated`);
@@ -100,4 +103,4 @@ ScriptsRouter
             });
     });
 
-module.exports = ScriptsRouter;
+module.exports = AdminScriptsRouter;

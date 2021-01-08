@@ -8,4 +8,5 @@ CREATE TABLE scripts (
     scripts_type TEXT NOT NULL, 
     scripts_image TEXT,
     content TEXT NOT NULL
+    admin_owner INTEGER REFERENCES admin(id)
 );

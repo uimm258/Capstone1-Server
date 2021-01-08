@@ -7,3 +7,4 @@ module.exports = {
     TEST_DATABASE_URL: process.env.TEST_DATABASE_URL || 'postgresql://yrspace:testpw@localhost/category-test',
     API_TOKEN: process.env.API_TOKEN || '143891f9-9ace-49d9-9a4a-5123d3809ff3',
 }
+

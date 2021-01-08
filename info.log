@@ -2,3 +2,5 @@
 {"message":"Script with id 45 not found","level":"error"}
 {"message":"The category_name is missing for the category to post","level":"error"}
 {"message":"category with id5 created","level":"info"}
+{"message":"Unauthorized request to path: /script","level":"error"}
+{"message":"The scripts_name value is missing from scripts post","level":"error"}
