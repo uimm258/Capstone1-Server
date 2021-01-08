@@ -1,1 +1,1 @@
-DROP TABLE admin; 
+DROP TABLE if exists admin; 
