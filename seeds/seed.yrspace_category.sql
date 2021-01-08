@@ -1,4 +1,4 @@
-insert into category (category_name,admin_owner)
+insert into category (category_name, admin_id)
 values
 ('五人本', 1),
 ('六人本', 1),

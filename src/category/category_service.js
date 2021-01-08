@@ -5,6 +5,7 @@ const CategoryService = {
             .from('category');
     },
     insertCategory(knex, newCategory){
+        console.log(newCategory, "******************")
         return knex
             .insert(newCategory)
             .into('category')

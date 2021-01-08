@@ -1,23 +1,24 @@
 const express = require('express');
 const xss = require('xss');
-const logger = require('../../logger');
+const logger = require('../logger');
 const AdminCategoryRouter = express.Router();
 const jsonParser = express.json();
-const AdminCategoryService = require('./admin-category-service');
-const { requireAuth } = require('../../middleware/jwt-auth');
+const CategoryService = require('./category_service');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const initCategory = (category) => ({
     id: category.id,
     category_name: xss(category.category_name),
-    admin: category.admin_id
+    admin_id: category.admin_id
 });
 
+//admin-post    
 AdminCategoryRouter
     .route('/')
-    .all(requireAuth)
+    //.all(requireAuth)
     .get((req, res, next) => {
         const knex = req.app.get('db');
-        AdminCategoryService.getAllCategory(knex, req.user.id)
+        CategoryService.getAllCategory(knex)
             .then((category) => res.json(category.map(initCategory)))
             .catch(next);
     })
@@ -31,8 +32,10 @@ AdminCategoryRouter
         const newCategory = {
             category_name: xss(req.body.category_name),
         };
-        newCategory.admin = req.user.id
-        AdminCategoryService
+        newCategory.admin_id = req.user.id
+        console.log(req.body.category_id, "***************")
+        console.log(req.user.id, "***************")
+        CategoryService
             .insertCategory(req.app.get('db'), newCategory)
             .then((category) => {
                 logger.info(`category with id${category.id} created`);
@@ -41,13 +44,12 @@ AdminCategoryRouter
             .catch(next);
     });
 
-//delete
 AdminCategoryRouter
     .route('/:category_id')
     .all(requireAuth)
     .all((req, res, next) => {
         const {category_id} = req.params;
-        AdminCategoryService.getById(req.app.get('db'), category_id)
+        CategoryService.getById(req.app.get('db'), category_id)
             .then((category) => {
                 if(!category) {
                     logger.error(`The category with id the ${category_id} was not found`);
@@ -64,7 +66,7 @@ AdminCategoryRouter
     })
     .delete((req, res, next) => {
         const {category_id} = req.params;
-        AdminCategoryService.deleteCategory(req.app.get('db'), category_id, req.user.id)
+        CategoryService.deleteCategory(req.app.get('db'), category_id)
             .then(()=> {
                 logger.info(`Category with id ${category_id} has been deleted`);
                 res.status(204).end();
@@ -79,11 +81,10 @@ AdminCategoryRouter
                 error: { message: 'patch request must supply values to update' },
             });
         }
-        AdminCategoryService
+        CategoryService
             .updateCategory(
                 req.app.get('db'),
                 res.cateogry.id,
-                req.user.id,
                 categoryUpdates
             ).then((updateCategory) => {
                 logger.info(`The category with id ${res.category.id} has been updated`);
@@ -91,4 +92,4 @@ AdminCategoryRouter
             });
     });
 
-module.exports = AdminCategoryRouter;
+module.exports = AdminCategoryRouter

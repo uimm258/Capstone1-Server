@@ -1,4 +1,4 @@
-const AuthService = require('../admin/auth-service')
+const AuthService = require('../auth/auth-service')
 
 function requireAuth(req, res, next) {
   const authToken = req.get('Authorization') || ''
@@ -12,6 +12,7 @@ function requireAuth(req, res, next) {
 
   try {
     const payload = AuthService.verifyJwt(bearerToken)
+    console.log("inside middleware")
 
     AuthService.getUserWithUserName(
       req.app.get('db'),

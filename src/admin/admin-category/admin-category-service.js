@@ -1,6 +1,6 @@
 const AdminCategoryService = {
     getAllCategory(knex){
-        return knex
+        return knex('category')
             .select('*')
             .from('category');
     },

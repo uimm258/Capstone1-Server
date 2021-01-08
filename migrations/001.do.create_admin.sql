@@ -1,5 +1,5 @@
 CREATE TABLE admin (
-  id INTEGER,
+  id serial PRIMARY KEY,
   username TEXT NOT NULL UNIQUE,
-  password TEXT NOT NULL,
+  password TEXT NOT NULL
 );

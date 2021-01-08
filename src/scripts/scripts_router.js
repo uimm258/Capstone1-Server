@@ -15,7 +15,7 @@ const initScripts = (script) => ({
     scripts_image: xss(script.scripts_image),
     content: xss(script.content),
     category_id: script.category_id,
-    admin: script.admin_owner
+    admin: script.admin_id
 });
 
 ScriptsRouter
@@ -23,7 +23,7 @@ ScriptsRouter
     .get((req, res, next) => {
         const knex = req.app.get('db');
         ScriptsService
-            .getAllScripts(knex, req.user.id)
+            .getAllScripts(knex)
             .then((scripts) => res.json(scripts.map(initScripts)))
             .catch(next);
     })
@@ -44,7 +44,6 @@ ScriptsRouter
             content: xss(script.content),
             category_id: script.category_id,
         };
-        newCategory.admin = req.user.id
         ScriptsService
             .insertNote(req.app.get('db'), newScript)
             .then((script) => {
@@ -77,7 +76,7 @@ ScriptsRouter
     .delete((req, res, next) => {
         const { script_id } = req.params;
         ScriptsService
-            .deleteScript(req.app.get('db'), script_id, req.user.id)
+            .deleteScript(req.app.get('db'), script_id)
             .then(() => {
                 logger.info(`Script with id ${script_id} deleted`);
                 res.status(204).end();
@@ -93,7 +92,7 @@ ScriptsRouter
             });
         }
         ScriptsService
-            .updateScript(req.app.get('db'), res.script.id, scriptUpdate, req.user.id)
+            .updateScript(req.app.get('db'), res.script.id, scriptUpdate)
             .then((updatedScript) => {
                 logger.info(`script with id ${res.script.id} updated`);
                 res.status(204).end();

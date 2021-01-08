@@ -6,7 +6,10 @@ const helmet = require('helmet')
 const { NODE_ENV } = require('./config')
 const CategoryRoute = require('./category/category_router')
 const ScriptsRoute = require('./scripts/scripts_router')
+const authRouter = require('./auth/auth-router')
 const validateBearerToken = require('./validate-bearer-token')
+const AdminCategoryRouter = require('./category/admin_category_router')
+//const AdminScriptsRoute = require('./admin/admin-scripts/admin-scripts-router')
 
 const app = express()
 
@@ -22,13 +25,16 @@ app.use(cors())
 // routes for category and scritps
 app.use('/category', CategoryRoute)
 app.use('/scripts', ScriptsRoute)
+app.use('/auth', authRouter);
+app.use('/category/admin', AdminCategoryRouter)
+//app.use('/scripts/admin', AdminScriptsRoute)
 
 
 app.get('/', (req, res) => {
    res.send('Hello, world!')
 })
 
-app.use(validateBearerToken)
+//app.use(validateBearerToken)
 
 // error handlers
 app.use(function errorHandler(error, req, res, next) {

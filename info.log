@@ -4,3 +4,30 @@
 {"message":"category with id5 created","level":"info"}
 {"message":"Unauthorized request to path: /script","level":"error"}
 {"message":"The scripts_name value is missing from scripts post","level":"error"}
+{"message":"Unauthorized request to path: /auth","level":"error"}
+{"message":"Script with id 1 not found","level":"error"}
+{"message":"Unauthorized request to path: /auth","level":"error"}
+{"message":"Unauthorized request to path: /category","level":"error"}
+{"message":"Unauthorized request to path: /auth","level":"error"}
+{"message":"Unauthorized request to path: /auth","level":"error"}
+{"message":"Unauthorized request to path: /auth","level":"error"}
+{"message":"Unauthorized request to path: /auth","level":"error"}
+{"message":"Unauthorized request to path: /auth","level":"error"}
+{"message":"Unauthorized request to path: /category","level":"error"}
+{"message":"Unauthorized request to path: /category/1","level":"error"}
+{"message":"Unauthorized request to path: /category/1","level":"error"}
+{"message":"Unauthorized request to path: /category/1","level":"error"}
+{"message":"Unauthorized request to path: /category/1","level":"error"}
+{"message":"Unauthorized request to path: /category/everyone/1","level":"error"}
+{"message":"Unauthorized request to path: /category/everyone/1","level":"error"}
+{"message":"Unauthorized request to path: /category/everyone/1","level":"error"}
+{"message":"Unauthorized request to path: /category/everyone/1","level":"error"}
+{"message":"Unauthorized request to path: /category/everyone/1","level":"error"}
+{"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
+{"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
+{"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
+{"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
+{"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
+{"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
+{"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
+{"message":"Unauthorized request to path: /cateogry/admin","level":"error"}

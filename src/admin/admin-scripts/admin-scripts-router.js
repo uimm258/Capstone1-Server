@@ -3,7 +3,7 @@ const AdminScriptsService = require('./admin-script-service');
 const xss = require('xss');
 const AdminScriptsRouter = express.Router();
 const jsonParser = express.json();
-const logger = require('../logger');
+const logger = require('../../logger');
 const { requireAuth } = require('../../middleware/jwt-auth');
 
 const initScripts = (script) => ({
@@ -16,7 +16,7 @@ const initScripts = (script) => ({
     scripts_image: xss(script.scripts_image),
     content: xss(script.content),
     category_id: script.category_id,
-    admin: script.admin_owner
+    admin: script.admin_id
 });
 
 AdminScriptsRouter
