@@ -31,3 +31,20 @@
 {"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
 {"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
 {"message":"Unauthorized request to path: /cateogry/admin","level":"error"}
+{"message":"category with id6 created","level":"info"}
+{"message":"Category with id 6 has been deleted","level":"info"}
+{"message":"category with id7 created","level":"info"}
+{"message":"Category with id 7 has been deleted","level":"info"}
+{"message":"The category with id the 7 was not found","level":"error"}
+{"message":"The category with id the 7 was not found","level":"error"}
+{"message":"The category with id the 6 was not found","level":"error"}
+{"message":"The category with id the 6 was not found","level":"error"}
+{"message":"category with id8 created","level":"info"}
+{"message":"The category with id 8 has been updated","level":"info"}
+{"message":"category with id9 created","level":"info"}
+{"message":"The category with id 9 has been updated","level":"info"}
+{"message":"Category with id 9 has been deleted","level":"info"}
+{"message":"The scripts_image value is missing from scripts post","level":"error"}
+{"message":"Scripts with id 87 has been created","level":"info"}
+{"message":"script with id 87 updated","level":"info"}
+{"message":"Script with id 87 deleted","level":"info"}

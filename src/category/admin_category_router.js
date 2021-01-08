@@ -14,8 +14,8 @@ const initCategory = (category) => ({
 
 //admin-post    
 AdminCategoryRouter
-    .route('/')
-    //.all(requireAuth)
+    .route('/category')
+    .all(requireAuth)
     .get((req, res, next) => {
         const knex = req.app.get('db');
         CategoryService.getAllCategory(knex)
@@ -23,18 +23,17 @@ AdminCategoryRouter
             .catch(next);
     })
     .post(jsonParser, (req, res, next) => {
-        for(const field of ['category_name']){
-            if(!req.body[field]){
+        for (const field of ['category_name']) {
+            if (!req.body[field]) {
                 logger.error(`The ${field} is missing for the category to post`);
-                return res.status(400).json({error:{message:`${field} is missing`}});
+                return res.status(400).json({ error: { message: `${field} is missing` } });
             }
         }
         const newCategory = {
             category_name: xss(req.body.category_name),
         };
         newCategory.admin_id = req.user.id
-        console.log(req.body.category_id, "***************")
-        console.log(req.user.id, "***************")
+
         CategoryService
             .insertCategory(req.app.get('db'), newCategory)
             .then((category) => {
@@ -45,15 +44,15 @@ AdminCategoryRouter
     });
 
 AdminCategoryRouter
-    .route('/:category_id')
+    .route('/category/:category_id')
     .all(requireAuth)
     .all((req, res, next) => {
-        const {category_id} = req.params;
+        const { category_id } = req.params;
         CategoryService.getById(req.app.get('db'), category_id)
             .then((category) => {
-                if(!category) {
+                if (!category) {
                     logger.error(`The category with id the ${category_id} was not found`);
-                    return res.status(404).json({error: {message: 'category not found'}});
+                    return res.status(404).json({ error: { message: 'category not found' } });
                 }
                 res.category = category;
                 next();
@@ -65,17 +64,17 @@ AdminCategoryRouter
         res.json(initCategory(category));
     })
     .delete((req, res, next) => {
-        const {category_id} = req.params;
+        const { category_id } = req.params;
         CategoryService.deleteCategory(req.app.get('db'), category_id)
-            .then(()=> {
+            .then(() => {
                 logger.info(`Category with id ${category_id} has been deleted`);
                 res.status(204).end();
             })
             .catch(next);
     })
-    .patch(jsonParser, (req, res,next) => {
+    .patch(jsonParser, (req, res, next) => {
         const categoryUpdates = req.body;
-        if(Object.keys(categoryUpdates).length == 0) {
+        if (Object.keys(categoryUpdates).length == 0) {
             logger.info('Category can not be empty');
             return res.status(400).json({
                 error: { message: 'patch request must supply values to update' },
@@ -84,7 +83,7 @@ AdminCategoryRouter
         CategoryService
             .updateCategory(
                 req.app.get('db'),
-                res.cateogry.id,
+                res.category.id,
                 categoryUpdates
             ).then((updateCategory) => {
                 logger.info(`The category with id ${res.category.id} has been updated`);

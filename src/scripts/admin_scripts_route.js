@@ -1,10 +1,10 @@
 const express = require('express');
-const AdminScriptsService = require('./admin-script-service');
+const ScriptsService = require('./scripts_service');
 const xss = require('xss');
 const AdminScriptsRouter = express.Router();
 const jsonParser = express.json();
-const logger = require('../../logger');
-const { requireAuth } = require('../../middleware/jwt-auth');
+const logger = require('../logger');
+const { requireAuth } = require('../middleware/jwt-auth');
 
 const initScripts = (script) => ({
     id: script.id,
@@ -16,16 +16,16 @@ const initScripts = (script) => ({
     scripts_image: xss(script.scripts_image),
     content: xss(script.content),
     category_id: script.category_id,
-    admin: script.admin_id
+    admin_id: script.admin_id
 });
 
 AdminScriptsRouter
-    .route('/')
+    .route('/scripts')
     .all(requireAuth)
     .get((req, res, next) => {
         const knex = req.app.get('db');
-        AdminScriptsService
-            .getAllScripts(knex, req.user.id)
+        ScriptsService
+            .getAllScripts(knex)
             .then((scripts) => res.json(scripts.map(initScripts)))
             .catch(next);
     })
@@ -37,18 +37,18 @@ AdminScriptsRouter
             }
         }
         const newScript = {
-            scripts_name: xss(script.scripts_name),
-            people: xss(script.people),
-            time_spend: xss(script.time_spend),
-            scripts_price: xss(script.scripts_price),
-            scripts_type: xss(script.scripts_type),
-            scripts_image: xss(script.scripts_image),
-            content: xss(script.content),
-            category_id: script.category_id,
+            scripts_name: xss(req.body.scripts_name),
+            people: xss(req.body.people),
+            time_spend: xss(req.body.time_spend),
+            scripts_price: xss(req.body.scripts_price),
+            scripts_type: xss(req.body.scripts_type),
+            scripts_image: xss(req.body.scripts_image),
+            content: xss(req.body.content),
+            category_id: req.body.category_id,
         };
-        newScript.admin = req.user.id
-        AdminScriptsService
-            .insertNote(req.app.get('db'), newScript)
+        newScript.admin_id = req.user.id
+        ScriptsService
+            .insertScripts(req.app.get('db'), newScript)
             .then((script) => {
                 logger.info(`Scripts with id ${script.id} has been created`);
                 res.status(201).location(`/scripts/${script.id}`).json(script);
@@ -57,11 +57,11 @@ AdminScriptsRouter
     });
 
 AdminScriptsRouter
-    .route('/:script_id')
+    .route('/scripts/:script_id')
     .all(requireAuth)
     .all((req, res, next) => {
         const { script_id } = req.params
-        AdminScriptsService
+        ScriptsService
             .getById(req.app.get('db'), script_id)
             .then((script)=> {
                 if(!script) {
@@ -79,8 +79,8 @@ AdminScriptsRouter
     })
     .delete((req, res, next) => {
         const { script_id } = req.params;
-        AdminScriptsService
-            .deleteScript(req.app.get('db'), script_id, req.user.id)
+        ScriptsService
+            .deleteScript(req.app.get('db'), script_id)
             .then(() => {
                 logger.info(`Script with id ${script_id} deleted`);
                 res.status(204).end();
@@ -95,8 +95,8 @@ AdminScriptsRouter
                 error: { message: 'patch request must supply values'},
             });
         }
-        AdminScriptsService
-            .updateScript(req.app.get('db'), res.script.id, scriptUpdate, req.user.id)
+        ScriptsService
+            .updateScript(req.app.get('db'), res.script.id, scriptUpdate)
             .then((updatedScript) => {
                 logger.info(`script with id ${res.script.id} updated`);
                 res.status(204).end();

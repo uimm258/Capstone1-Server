@@ -5,7 +5,6 @@ const CategoryService = {
             .from('category');
     },
     insertCategory(knex, newCategory){
-        console.log(newCategory, "******************")
         return knex
             .insert(newCategory)
             .into('category')
@@ -26,10 +25,10 @@ const CategoryService = {
             .where({id})
             .delete();
     },
-    updateFolder(knex, id, newFolderFields){
-        return knex('folders')
+    updateCategory(knex, id, newCategoryFields){
+        return knex('category')
             .where({id})
-            .update(newFolderFields);
+            .update(newCategoryFields);
     },
 };
 

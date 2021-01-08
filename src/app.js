@@ -9,7 +9,7 @@ const ScriptsRoute = require('./scripts/scripts_router')
 const authRouter = require('./auth/auth-router')
 const validateBearerToken = require('./validate-bearer-token')
 const AdminCategoryRouter = require('./category/admin_category_router')
-//const AdminScriptsRoute = require('./admin/admin-scripts/admin-scripts-router')
+const AdminScriptsRoute = require('./scripts/admin_scripts_route')
 
 const app = express()
 
@@ -26,8 +26,8 @@ app.use(cors())
 app.use('/category', CategoryRoute)
 app.use('/scripts', ScriptsRoute)
 app.use('/auth', authRouter);
-app.use('/category/admin', AdminCategoryRouter)
-//app.use('/scripts/admin', AdminScriptsRoute)
+app.use('/admin', AdminCategoryRouter)
+app.use('/admin', AdminScriptsRoute)
 
 
 app.get('/', (req, res) => {

@@ -21,14 +21,14 @@ const ScriptsService = {
             .first();
     },
     deleteScript(knex, id){
-        return knex('script')
+        return knex('scripts')
             .where({id})
             .delete();
     },
-    updateScript(knew,id,newScript){
+    updateScript(knex ,id,newScriptFields){
         return knex('scripts')
             .where({id})
-            .update(newScript);
+            .update(newScriptFields);
     },
 };
 
