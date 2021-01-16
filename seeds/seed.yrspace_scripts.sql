@@ -1,4 +1,4 @@
-insert into scripts(scripts_name, people, time_spend, scripts_price, scripts_type, scripts_image, content, category_id, admin_id)
+insert into scripts(scripts_name, people, time_spend, scripts_type, scripts_price, scripts_image, content, category_id, admin_id)
 values
 
 -- 五人本

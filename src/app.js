@@ -22,7 +22,7 @@ app.use(morgan(morganSetting))
 app.use(helmet())
 app.use(cors())
 
-// routes for category and scritps
+// routes for category and scripts
 app.use('/category', CategoryRoute)
 app.use('/scripts', ScriptsRoute)
 app.use('/auth', authRouter);
