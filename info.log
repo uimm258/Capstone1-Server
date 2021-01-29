@@ -94,3 +94,38 @@
 {"message":"script with id 89 updated","level":"info"}
 {"message":"script with id 89 updated","level":"info"}
 {"message":"script with id 89 updated","level":"info"}
+{"message":"Script with id 89 deleted","level":"info"}
+{"message":"category with id7 created","level":"info"}
+{"message":"Scripts with id 90 has been created","level":"info"}
+{"message":"Script with id 90 deleted","level":"info"}
+{"message":"The category with id the 9 was not found","level":"error"}
+{"message":"Category with id 6 has been deleted","level":"info"}
+{"message":"The category with id the 6 was not found","level":"error"}
+{"message":"category with id8 created","level":"info"}
+{"message":"Category with id 7 has been deleted","level":"info"}
+{"message":"The category with id the 7 was not found","level":"error"}
+{"message":"Category with id 8 has been deleted","level":"info"}
+{"message":"category with id9 created","level":"info"}
+{"message":"Category with id 9 has been deleted","level":"info"}
+{"message":"category with id10 created","level":"info"}
+{"message":"Category with id 10 has been deleted","level":"info"}
+{"message":"category with id11 created","level":"info"}
+{"message":"Category with id 11 has been deleted","level":"info"}
+{"message":"category with id12 created","level":"info"}
+{"message":"Category with id 12 has been deleted","level":"info"}
+{"message":"category with id13 created","level":"info"}
+{"message":"Category with id 13 has been deleted","level":"info"}
+{"message":"category with id14 created","level":"info"}
+{"message":"Category with id 14 has been deleted","level":"info"}
+{"message":"The category with id the 14 was not found","level":"error"}
+{"message":"category with id15 created","level":"info"}
+{"message":"Category with id 15 has been deleted","level":"info"}
+{"message":"The category with id the 15 was not found","level":"error"}
+{"message":"category with id16 created","level":"info"}
+{"message":"Category with id 16 has been deleted","level":"info"}
+{"message":"category with id17 created","level":"info"}
+{"message":"Category with id 17 has been deleted","level":"info"}
+{"message":"category with id18 created","level":"info"}
+{"message":"Category with id 18 has been deleted","level":"info"}
+{"message":"category with id19 created","level":"info"}
+{"message":"Category with id 19 has been deleted","level":"info"}

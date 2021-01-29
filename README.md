@@ -49,3 +49,21 @@ As an admin:
 :-------------------------:
 ![Script-Main-Page](./README_screenshots/Script-Main-with-edit-2.png)
 ![Script-Main-Page](./README_screenshots/Script-Main-with-edit-2.png)
+
+### Open Endpoints for Backend
+
+* Get /category: display the entire data that's in the category table
+* Get /scripts: display the entire data that's in the script table
+
+Closed endpoints require a valid Token to be included in the header of the request. 
+* Login: /admin
+* Get: /admin/category 
+    display general information
+* Post: /admin/category
+    add new categories to the existing table
+* Post: /admin/scripts
+    add new scripts to the existing table
+* Delete: /admin/category: 
+    remove the selected category
+* Delete: /admin/scripts
+    remove the selected script
