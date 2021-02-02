@@ -43,7 +43,7 @@ describe("Stable Software Endpoints", function () {
     });
   });
 
-  describe.only("GET /scripts", () => {
+  describe("GET /scripts", () => {
     context("Given there are no scripts", () => {
       it("responds with an empty array", () => {
         return supertest(app).get("/scripts").expect(200, []);
